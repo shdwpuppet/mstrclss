@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Class(models.Model):
     name = models.CharField(max_length=64)
     slug = models.SlugField()
-    attendee = models.ManyToManyField(Attendee)
+    attendee = models.ManyToManyField('Attendee')
     start = models.DateTimeField()
     end = models.DateTimeField()
 

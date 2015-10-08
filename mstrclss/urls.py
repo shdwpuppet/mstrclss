@@ -23,6 +23,7 @@ from  django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', TemplateView.as_view(template_name='templates/landing.html')),
+    url(r'^classes/', 'classes.views.index', name='class_index'),
 ]
 urlpatterns += (
     url(r'^static/(.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT, 'show_indexes': True}),
