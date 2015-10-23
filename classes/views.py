@@ -17,7 +17,7 @@ def detail(request, class_pk):
 def signup(request, class_pk):
     clss = get_object_or_404(Class, pk=class_pk)
     try:
-        clss.signup(attendee=request.user.attendee)
+        clss.signup(user=request.user)
     except ValidationError as error:
         if error.code == "unique_together":
             print("attempted to signup for a class already signed up for")

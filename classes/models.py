@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Class(models.Model):
@@ -19,16 +20,17 @@ class Class(models.Model):
             self.slug = slugify(self.name)
         super(Class, self).save(*args, **kwargs)
 
-    def signup(self, attendee):
-        if all([self.is_conflict(clss) for clss in attendee.class_set.all()]) and attendee not in self.attendees.all():
+    def signup(self, user):
+        if all([self.is_conflict(clss) for clss in user.attendee.class_set.all()]) and user.attendee not in self.attendees.all():
             if len(self.attendees.all()) < self.max_attendees:
-                self.attendees.add(attendee)
+                self.attendees.add(user.attendee)
             else:
-                WaitlistedAttendee.objects.create()
+                WaitlistedAttendee.objects.create(clss=self, user=user)
 
 
 class Attendee(models.Model):
     user = models.OneToOneField(User)
+
     def is_eligible(self, new_class):
         classes = self.class_set.all()
         if not any([cls.is_conflict(new_class) for cls in classes]) and classes.length <= 3:
@@ -40,3 +42,8 @@ class WaitlistedAttendee(models.Model):
     user = models.ForeignKey(User)
     signed_up = models.DateTimeField()
     unique_together = (clss, user)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.signed_up = timezone.now()
+        return super(WaitlistedAttendee, self).save(*args, **kwargs)
