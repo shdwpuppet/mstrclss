@@ -23,6 +23,7 @@ from  django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', TemplateView.as_view(template_name='templates/landing.html')),
+    url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^classes/', 'classes.views.index', name='class_index'),
 ]
 urlpatterns += (
