@@ -18,7 +18,7 @@ class Class(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.name)
-        super(Class, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)
 
     def signup(self, user):
         if all([self.is_conflict(clss) for clss in user.attendee.class_set.all()]) and user.attendee not in self.attendees.all():
@@ -46,4 +46,4 @@ class WaitlistedAttendee(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.signed_up = timezone.now()
-        return super(WaitlistedAttendee, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)
