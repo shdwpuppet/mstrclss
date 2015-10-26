@@ -35,6 +35,7 @@ class Attendee(models.Model):
         classes = self.class_set.all()
         if not any([cls.is_conflict(new_class) for cls in classes]) and classes.length <= 3:
             return True
+        return False
 
 
 class WaitlistedAttendee(models.Model):

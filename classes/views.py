@@ -8,7 +8,7 @@ from classes.decorators import staff_member_required
 def index(request):
     # the index of the class listing, not of the website
     classes = Class.objects.all().order_by('start')
-    return render(request, 'templates/class_index.html', {'classes': classes})
+    return render(request, 'templates/masterclass-list.html', {'classes': classes})
 
 
 def detail(request, class_pk):
