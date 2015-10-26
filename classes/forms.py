@@ -5,4 +5,4 @@ class ClassForm(ModelForm):
 
     class Meta:
         model = Class
-        fields = ['name', 'start', 'end', 'max_attendees']
+        fields = ['name', 'teacher', 'max_attendees']
