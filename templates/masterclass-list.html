@@ -1,0 +1,17 @@
+{% extends 'templates/base.html' %}
+{% block content %}
+    {% for class in classes %}
+<article class="masterclass clearfix">
+  <a href="#" class="masterclass-image">
+    <h2>{{ class.name }}</h2>
+  </a>
+  <div class="masterclass-info">
+    <h3>Subtitle</h3>
+    <p class="small">Small description</p>
+    <span class="small">Time</span>
+    <span class="small">Instructor</span>
+    <span class="small">Instructor description</span>
+  </div>
+</article>
+    {% endfor %}
+{% endblock %}
