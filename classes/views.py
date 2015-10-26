@@ -46,4 +46,4 @@ def add_or_edit_class(request, class_pk=None):
         'classes': classes,
     }
 
-    return render(request, 'manage_classes.html', context)
+    return render(request, 'templates/manage_classes.html', context)
