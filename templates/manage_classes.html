@@ -3,18 +3,7 @@
 <article class="masterclass-detail clearfix">
     <form method="POST">
         {% csrf_token %}
-        {% for field in form %}
-            {% if field.errors %}
-                <div class="form-group has-error">
-                    <label>{% for error in field.errors %}{{ error }}{% endfor %}</label>
-                    {{ field }}
-                </div>
-            {% else %}
-                <div class="form-group">
-                    {{ field }}
-                </div>
-            {% endif %}
-        {% endfor %}
-        <button type="submit" class="save btn btn-default">Add/Edit Tournament</button>
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Add/Edit Class</button>
     </form>
 </article>
