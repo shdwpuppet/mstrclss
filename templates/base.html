@@ -21,6 +21,7 @@
       <a href="#">Home</a>
       <a href="#">Classes</a>
       <a href="#">About</a>
+        {% if request.user.is_staff  %}<a href="{% url 'class_manager' %}">Manage</a>{% endif %}
     </nav>
     <main>
         {% block content %}{% endblock %}
