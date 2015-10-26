@@ -26,5 +26,10 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+    {% if user.is_authenticated %}
+        Your are logged in as {{ request.user.username }}
+    {% else %}
+        <a href="{% url 'social:begin' 'steam' %}?next={{ request.path }}">Sign In Through Steam</a>
+    {% endif %}
   </body>
 </html>
