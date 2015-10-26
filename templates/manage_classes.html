@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block content %}
 <article class="masterclass-detail clearfix">
     <form method="POST">
         {% csrf_token %}
@@ -7,3 +7,4 @@
         <button type="submit" class="save btn btn-default">Add/Edit Class</button>
     </form>
 </article>
+{% endblock %}
