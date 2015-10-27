@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masters of classes</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="../static/css/masterclass-list.css">
-    <link rel="stylesheet" href="../static/css/masterclass-detail.css">
+      <link rel="stylesheet" href="{% static 'css/masterclass-list.css.css' %}">
+      <link rel="stylesheet" href="{% static 'css/masterclass-detail.css.css' %}">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   </head>
   <body class="container clearfix">
@@ -19,7 +19,7 @@
     </header>
     <nav>
       <a href="#">Home</a>
-      <a href="#">Classes</a>
+      <a href="{% url 'class_index' %}">Classes</a>
       <a href="#">About</a>
         {% if request.user.is_staff  %}<a href="{% url 'class_manager' %}">Manage</a>{% endif %}
     </nav>
