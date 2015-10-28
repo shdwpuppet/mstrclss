@@ -27,6 +27,4 @@ urlpatterns = [
     url(r'^classes/$', 'classes.views.index', name='class_index'),
     url(r'^classes/manage/$', 'classes.views.add_or_edit_class', name='class_manager')
 ]
-urlpatterns += (
-    url(r'^static/(.*)$', 'django.views.static.serve', {'document_root': STATIC_ROOT, 'show_indexes': True}),
-)
+
