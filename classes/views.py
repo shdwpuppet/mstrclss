@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.models import User
 from classes.models import Class, Attendee
 from classes.forms import ClassForm, SignupForm
 from classes.decorators import staff_member_required
@@ -9,6 +10,13 @@ def index(request):
     # the index of the class listing, not of the website
     classes = Class.objects.all().order_by('start')
     return render(request, 'templates/masterclass-list.html', {'classes': classes})
+
+
+def drop(request, class_pk, user_pk):
+    if user_pk != request.user.pk or request.user.is_staff:
+        class_ = get_object_or_404(Class, pk=class_pk)
+        class_.attendees.remove(User.objects.get(pk=user_pk).attendee)
+    return redirect('classes.views.detail', class_pk=class_pk)
 
 
 def detail(request, class_pk):

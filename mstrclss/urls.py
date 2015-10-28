@@ -24,6 +24,7 @@ urlpatterns = [
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^classes/$', 'classes.views.index', name='class_index'),
     url(r'^classes/(?P<class_pk>[0-9]+)/$', 'classes.views.detail', name='class_detail'),
+    url(r'^classes/(?P<class_pk>[0-9]+)/drop/(?P<user_pk>[0-9]+)/$', 'classes.views.drop', name='class_drop'),
     url(r'^classes/manage/$', 'classes.views.add_or_edit_class', name='class_manager'),
 ]
 

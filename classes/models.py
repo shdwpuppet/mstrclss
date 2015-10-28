@@ -12,6 +12,7 @@ class Class(models.Model):
     end = models.DateTimeField()
     max_attendees = models.IntegerField(default=20)
     teacher = models.CharField(max_length=64)
+    description = models.TextField()
 
     def is_conflict(self, other_class):
         return (self.start < other_class.end) and (self.end > other_class.start)

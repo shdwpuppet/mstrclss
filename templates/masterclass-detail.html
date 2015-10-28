@@ -17,14 +17,18 @@
             <!-- /.col-md-8 -->
             <div class="col-md-4">
                 <h1>{{ class.name }}</h1>
-                <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-                <form method="post">
+                <p>{{ class.description }}</p>
+
+                    {% if request.user.attendee in class.attendees.all %}
+                        <a href="{% url 'class_drop' class.pk request.user.pk %}" class="btn btn-primary btn-lg">Drop Class</a>
+                    {% else %}
+                        <form method="post">
                     {% csrf_token %}
                     {% for field in form %}
                     {{ field }}
                     {% endfor %}
-                    <button class="btn btn-primary btn-lg">Sign Up For Class</button>
-                </form>
+                    <button class="btn btn-primary btn-lg">Sign Up For Class</button></form>
+                    {% endif %}
             </div>
             <!-- /.col-md-4 -->
         </div>
@@ -45,22 +49,20 @@
 
         <!-- Content Row -->
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <h2>Heading 1</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
                 <a class="btn btn-default" href="#">More Info</a>
             </div>
-            <!-- /.col-md-4 -->
             <div class="col-md-4">
-                <h2>Heading 2</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                <a class="btn btn-default" href="#">More Info</a>
-            </div>
-            <!-- /.col-md-4 -->
-            <div class="col-md-4">
-                <h2>Heading 3</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                <a class="btn btn-default" href="#">More Info</a>
+<div class="panel panel-default">
+                <div class="panel-heading">Class Participants</div>
+                <div class="panel-body">
+                  {% for attendee in class.attendees.all %}
+                    {{ attendee.user.username }}{% if request.user.is_staff %} <a href="{% url 'class_drop' class.pk attendee.user.pk %}">(Drop)</a>{% endif %}
+                {% endfor %}
+                </div>
+              </div>
             </div>
             <!-- /.col-md-4 -->
         </div>
