@@ -1,47 +1,80 @@
 {% extends 'templates/base.html' %}
+{% load staticfiles %}
+{% block topscript %}
+    <link href="{% static 'css/manage_classes.css' %}" rel="stylesheet">
+{% endblock %}
 {% block content %}
-<article class="masterclass-detail clearfix">
-    <form method="POST">
-        {% csrf_token %}
-                                {% for field in form %}
-                            {% if field.errors %}
-                                <div class="form-group has-error">
-                                    <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i>{% for error in field.errors %}{{ error }}{% endfor %}</label>
-                                    {{ field }}
-                                </div>
-                            {% else %}
-                                <div class="form-group">
-                                    {{ field.label_tag }} {{ field }}
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-    <label>Start Time</label>
-    <select name="start_time">
-  <option value="13">1 PM</option>
-  <option value="14">2 PM</option>
-  <option value="15">3 PM</option>
-  <option value="16">4 PM</option>
-          <option value="17">5 PM</option>
-  <option value="18">6 PM</option>
-  <option value="19">7 PM</option>
-  <option value="20">8 PM</option>
-        <option value="21">9 PM</option>
-  <option value="22">10 PM</option>
-</select>
-        <label>End Time</label>
-    <select name="end_time">
-  <option value="13">1 PM</option>
-  <option value="14">2 PM</option>
-  <option value="15">3 PM</option>
-  <option value="16">4 PM</option>
-          <option value="17">5 PM</option>
-  <option value="18">6 PM</option>
-  <option value="19">7 PM</option>
-  <option value="20">8 PM</option>
-        <option value="21">9 PM</option>
-  <option value="22">10 PM</option>
-</select>
-        <button type="submit" class="save btn btn-default">Add/Edit Class</button>
-    </form>
-</article>
+    <div class="row">
+        <div class="col-md-8"><table class="table table-striped table-hover ">
+            <thead>
+            <tr>
+                <th>PK</th>
+                <th>Class Name</th>
+                <th>Teacher</th>
+                <th>Attendees</th>
+                <th>Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for class in classes %}
+                <tr>
+                    <td>{{ class.pk }}</td>
+                    <td>{{ class.name }}</td>
+                    <td>{{ class.teacher }}</td>
+                    <td>{{ class.attendees.count }}</td>
+                    <td>{{ class.start }}-{{ class.end }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table></div>
+        <div class="col-md-4">
+            <form class="form-horizontal" method="post">
+                <fieldset>
+                    <legend>Legend</legend>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            {{ field.label_tag }} {{ field }}
+                        </div>
+                    {% endfor %}
+                    <div class="form-group">
+                        <label>Start Time</label>
+                        <select name="start_time">
+                            <option value="13">1 PM</option>
+                            <option value="14">2 PM</option>
+                            <option value="15">3 PM</option>
+                            <option value="16">4 PM</option>
+                            <option value="17">5 PM</option>
+                            <option value="18">6 PM</option>
+                            <option value="19">7 PM</option>
+                            <option value="20">8 PM</option>
+                            <option value="21">9 PM</option>
+                            <option value="22">10 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>End Time</label>
+                        <select name="end_time">
+                            <option value="13">1 PM</option>
+                            <option value="14">2 PM</option>
+                            <option value="15">3 PM</option>
+                            <option value="16">4 PM</option>
+                            <option value="17">5 PM</option>
+                            <option value="18">6 PM</option>
+                            <option value="19">7 PM</option>
+                            <option value="20">8 PM</option>
+                            <option value="21">9 PM</option>
+                            <option value="22">10 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="submit" class="btn btn-primary">Add Class</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
 {% endblock %}

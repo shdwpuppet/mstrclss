@@ -1,16 +1,36 @@
 {% extends 'templates/base.html' %}
+{% load staticfiles %}
+{% block topscript %}
+    <link href="{% static 'css/masterclass-list.css' %}" rel="stylesheet">
+{% endblock %}
 {% block content %}
-    {% for class in classes %}
-<article class="masterclass clearfix">
-  <a href="#" class="masterclass-image">
-    <h2>{{ class.name }}</h2>
-  </a>
-  <div class="masterclass-info">
-    <p class="small">Small description</p>
-    <span class="small">{{ class.start }}-{{ class.end }}</span>
-    <span class="small">{{ class.instructor }}</span>
-    <span class="small">Instructor description</span>
-  </div>
-</article>
-    {% endfor %}
+<div class="container class-spacer">
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Class Listing
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Projects Row -->
+        <div class="row">
+            {% for class in classes %}
+            <div class="col-md-4 class-item">
+                <a href="#">
+                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                </a>
+                <h3>
+                    <a href="#">{{ class.name }}</a>
+                </h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+                </div>
+                <div class="row">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

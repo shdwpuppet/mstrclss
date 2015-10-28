@@ -1,31 +1,17 @@
-
-<!doctype html>
-<html lang="en">
-<head>
-    <title>Sssoon Page </title>
-    
-    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" />
-	<link href="{{ STATIC_URL }}css/landing.css" rel="stylesheet" />
-  
-</head>
-
-<body>
-<div class="main" style="background-image: url('{{ STATIC_URL }}images/default.jpg')">
-    <div class="cover black" data-color="black"></div>
+{% extends 'templates/base.html' %}
+{% load staticfiles %}
+{% block topscript %}
+    <link href="{% static 'css/landing.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
     <div class="container">
-        <h1 class="logo">
-            Master Of Classes
-        </h1>
-        <div class="content">
-            <h4 class="motto">The best ever series of TF2 classes is coming soon.</h4>
-            <div class="subscribe">
-                <h5 class="info-text">
-                    Stay tuned for more information.
-                </h5>
-            </div>
-        </div>
-    </div>
- </div>
- </body>
 
-</html>
+        <!-- Jumbotron Header -->
+        <header class="jumbotron landing-spacer">
+            <h1>Master of Classes</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+            <p><a href="{% url 'class_index' %}" class="btn btn-primary btn-large">See All Classes!</a>
+            </p>
+        </header>
+    </div>
+{% endblock %}

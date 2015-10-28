@@ -1,35 +1,67 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+
+<head>
+
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masters of classes</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-      <link rel="stylesheet" href="{% static 'css/masterclass-list.css' %}">
-      <link rel="stylesheet" href="{% static 'css/masterclass-detail.css' %}">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  </head>
-  <body class="container clearfix">
-    <header>
-      <a href="#" class="header-image">
-        <h1>Masters of classes</h1>
-      </a>
-    </header>
-    <nav>
-      <a href="#">Home</a>
-      <a href="{% url 'class_index' %}">Classes</a>
-      <a href="#">About</a>
-        {% if request.user.is_staff  %}<a href="{% url 'class_manager' %}">Manage</a>{% endif %}
+    <meta name="author" content="">
+
+    <title>Master of Classes</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    {% block topscript %}{% endblock %}
+
+</head>
+
+<body>
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Master of Classes</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{% url 'class_index' %}">Classes</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    {% if request.user.is_staff %}
+                    <li>
+                        <a href="{% url 'class_manager' %}">Manage</a>
+                    </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="#">My Classes</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'social:begin' 'steam' %}?next={{ request.path }}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
     </nav>
-    <main>
+
+    <!-- Page Content -->
+    <div class="container">
         {% block content %}{% endblock %}
-    </main>
-    {% if user.is_authenticated %}
-        Your are logged in as {{ request.user.username }}
-    {% else %}
-        <a href="{% url 'social:begin' 'steam' %}?next={{ request.path }}">Sign In Through Steam</a>
-    {% endif %}
-  </body>
+    <hr>
+            <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Master of Classes 2015. Powered by Steam</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
 </html>
