@@ -34,6 +34,9 @@ class Class(models.Model):
     def __str__(self):
         return self.name
 
+    def image_name(self):
+        return self.name.replace(' ', '').lower()
+
 
 class Attendee(models.Model):
     user = models.OneToOneField(User)

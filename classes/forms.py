@@ -9,7 +9,7 @@ class ClassForm(ModelForm):
 
     class Meta:
         model = Class
-        fields = ['name', 'teacher', 'max_attendees']
+        fields = ['name', 'teacher', 'max_attendees', 'description']
 
 
 class SignupForm(forms.Form):
@@ -21,7 +21,7 @@ class SignupForm(forms.Form):
         clss = Class.objects.get(pk=self.cleaned_data.get('classpk'))
 
         if not all([clss.is_conflict(cls) for cls in user.attendee.class_set.all()]):
-            raise ValidationError('This class time has a conflict with one or more classes')
+            raise ValidationError('This class time has a conflict with one or more classes you are currently signed up for')
         elif user.attendee in clss.attendees.all():
             raise ValidationError('You have already signed up for this class')
 
