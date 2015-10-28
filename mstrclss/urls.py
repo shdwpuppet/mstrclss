@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='templates/landing.html')),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^classes/$', 'classes.views.index', name='class_index'),
-    url(r'^classes/manage/$', 'classes.views.add_or_edit_class', name='class_manager')
+    url(r'^classes/(?P<class_pk>[0-9]+)/$', 'classes.views.detail', name='class_detail'),
+    url(r'^classes/manage/$', 'classes.views.add_or_edit_class', name='class_manager'),
 ]
 

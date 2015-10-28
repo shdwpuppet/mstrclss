@@ -13,7 +13,6 @@ class Class(models.Model):
     max_attendees = models.IntegerField(default=20)
     teacher = models.CharField(max_length=64)
 
-
     def is_conflict(self, other_class):
         return (self.start < other_class.end) and (self.end > other_class.start)
 
@@ -23,11 +22,16 @@ class Class(models.Model):
         return super().save(*args, **kwargs)
 
     def signup(self, user):
-        if all([self.is_conflict(clss) for clss in user.attendee.class_set.all()]) and user.attendee not in self.attendees.all():
-            if len(self.attendees.all()) < self.max_attendees:
-                self.attendees.add(user.attendee)
-            else:
-                WaitlistedAttendee.objects.create(clss=self, user=user)
+        if len(self.attendees.all()) < self.max_attendees:
+            self.attendees.add(user.attendee)
+        else:
+            WaitlistedAttendee.objects.create(clss=self, user=user)
+
+    class Meta:
+        ordering = ['start']
+
+    def __str__(self):
+        return self.name
 
 
 class Attendee(models.Model):

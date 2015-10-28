@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from classes.models import Class
-from django.core.exceptions import ValidationError
-from classes.forms import ClassForm
+from classes.models import Class, Attendee
+from classes.forms import ClassForm, SignupForm
 from classes.decorators import staff_member_required
 import datetime
 
@@ -13,17 +12,20 @@ def index(request):
 
 
 def detail(request, class_pk):
+    Attendee.objects.get_or_create(user=request.user)  # Hackish but idk what else to do
     class_ = get_object_or_404(Class, pk=class_pk)
-    return render(request, 'templates/class_detail.html', {'class': class_})
+    form = SignupForm(initial={'userpk': request.user.pk, 'classpk': class_pk})
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            class_.signup(user=request.user)
+            return redirect('classes.views.detail', class_pk=class_.pk)
 
-
-def signup(request, class_pk):
-    clss = get_object_or_404(Class, pk=class_pk)
-    try:
-        clss.signup(user=request.user)
-    except ValidationError as error:
-        if error.code == "unique_together":
-            print("attempted to signup for a class already signed up for")
+    context = {
+        'class': class_,
+        'form': form,
+    }
+    return render(request, 'templates/masterclass-detail.html', context)
 
 
 @staff_member_required
