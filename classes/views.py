@@ -8,7 +8,7 @@ import datetime
 
 def index(request, user=False):
     # the index of the class listing, not of the website
-    if not user:
+    if user:
         classes = Class.objects.all().order_by('start')
     else:
         classes = request.user.attendee.class_set.all()
