@@ -47,8 +47,8 @@ def add_or_edit_class(request, class_pk=None):
     if request.method == 'POST':
         form = ClassForm(request.POST, instance=clss)
         if form.is_valid():
-            clss.start = datetime.datetime.strptime('11-14-2015 '+request.POST.get('start_time')+':00', '%m-%d-%Y %H:%M')
-            clss.end = datetime.datetime.strptime('11-14-2015 '+request.POST.get('end_time')+':00', '%m-%d-%Y %H:%M')
+            clss.start = datetime.datetime.strptime('11-14-2015 '+request.POST.get('start_time')+':'+request.POST.get('start_min'), '%m-%d-%Y %H:%M')
+            clss.end = datetime.datetime.strptime('11-14-2015 '+request.POST.get('end_time')+':'+request.POST.get('end_min'), '%m-%d-%Y %H:%M')
             form.save()
             clss.save()
             return redirect(add_or_edit_class)
