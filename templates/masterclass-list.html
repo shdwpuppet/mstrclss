@@ -19,7 +19,7 @@
             {% for class in classes %}
             <div class="col-md-4 class-item">
                 <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                    <img class="img-responsive" src="{% static 'images/class_images/'%}{{ class.image_name }}_sm.jpg" alt="">
                 </a>
                 <h3>
                     <a href="{% url 'class_detail' class.pk %}">{{ class.name }}</a>
