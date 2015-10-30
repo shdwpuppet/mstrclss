@@ -28,8 +28,8 @@
                   <a href="{% url 'class_edit' class.pk %}" class="btn btn-default">Edit</a>
                   <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="{% url 'class_toggle_live' class.pk %}">Toggle Class Live</a></li>
-                    <li><a href="#" data-toggle="modal" data-target="#modal{{ class.pk }}">Delete</a></li>
+                    <li><a href="{% url 'class_toggle_live' class.pk %}" class="text-danger">Toggle Class Live</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#modal{{ class.pk }}" class="text-danger">Delete</a></li>
                     <li><a href="#">Something else here</a></li>
                     <li class="divider"></li>
                     <li><a href="#">Separated link</a></li>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Deleting the class is a permanent action. The site admin (Dr.Shdwpuppet) will not listen to your tears if you remove this class, he cannot fix it. Do not delete this class unless you are absolutely positive that is what you want to do. Kevin, I swear to god if you just click through and don't pay attention I will be dissapointed.</p>
-                    <p>The class you are about to delete is {{ class.name }}, is being taught by {{ class.teacher }} and currently has {{ class.attendees.count }} currently signed up. EVERY SINGLE SIGNED UP PERSON WILL BE DROPPED FROM THIS CLASS IF YOU DELETE IT. I CANNOT GET THOSE BACK.</p>
+                    <p>The class you are about to delete is {{ class.name }}, is being taught by {{ class.teacher }} and currently has {{ class.attendees.count }} students signed up. EVERY SINGLE SIGNED UP PERSON WILL BE DROPPED FROM THIS CLASS IF YOU DELETE IT. I CANNOT GET THOSE BACK.</p>
                     <p>God help us all.</p>
                   </div>
               <div class="modal-footer">
