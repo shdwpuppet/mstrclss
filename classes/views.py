@@ -48,9 +48,11 @@ def delete_class(request, class_pk):
 
 
 def detail(request, class_pk):
-      # Hackish but idk what else to do
     class_ = get_object_or_404(Class, pk=class_pk)
     form = SignupForm(initial={'userpk': request.user.pk, 'classpk': class_pk})
+    first_class = False
+    if request.user.attendee.class_set.all().count() == 0:
+        first_class = True
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -60,6 +62,7 @@ def detail(request, class_pk):
     context = {
         'class': class_,
         'form': form,
+        'first_class': first_class
     }
     return render(request, 'templates/masterclass-detail.html', context)
 
