@@ -14,6 +14,7 @@ class Class(models.Model):
     teacher = models.CharField(max_length=64)
     description = models.TextField()
     quote = models.TextField(max_length=128)
+    manual_live = models.BooleanField(default=False)
 
     def is_conflict(self, other_class):
         return (self.start < other_class.end) and (self.end > other_class.start)
@@ -37,6 +38,15 @@ class Class(models.Model):
 
     def image_name(self):
         return self.name.replace(' ', '').lower()
+
+    def start_time(self):
+        return self.start.time().strftime("%I:%M %p")
+
+    def end_time(self):
+        return self.end.time().strftime("%I:%M %p")
+
+    def is_live(self):
+        return self.start < timezone.now() < self.end or self.manual_live
 
 
 class Attendee(models.Model):

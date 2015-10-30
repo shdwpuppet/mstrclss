@@ -19,6 +19,24 @@ def drop(request, class_pk, user_pk):
     return redirect('classes.views.detail', class_pk=class_pk)
 
 
+@staff_member_required
+def toggle_live(request, class_pk):
+    class_ = get_object_or_404(Class, pk=class_pk)
+    if class_.manual_live:
+        class_.manual_live = False
+    else:
+        class_.manual_live = True
+
+    return redirect(add_or_edit_class)
+
+
+@staff_member_required
+def delete_class(request, class_pk):
+    class_ = get_object_or_404(Class, pk=class_pk)
+    class_.delete()
+    return redirect(add_or_edit_class)
+
+
 def detail(request, class_pk):
     Attendee.objects.get_or_create(user=request.user)  # Hackish but idk what else to do
     class_ = get_object_or_404(Class, pk=class_pk)
