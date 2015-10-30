@@ -44,7 +44,7 @@
                     </li>
                     {% else %}
                     <li>
-                        <a href="{% url 'social:begin' 'steam' %}?next=/">Login</a>
+                        <a href="{% url 'social:begin' 'steam' %}?next={{ request.path }}">Login</a>
                     </li>
                     {% endif %}
                 </ul>
