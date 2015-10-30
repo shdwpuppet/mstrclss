@@ -15,6 +15,7 @@ class Class(models.Model):
     description = models.TextField()
     quote = models.TextField(max_length=128)
     manual_live = models.BooleanField(default=False)
+    information = models.TextField()
 
     def is_conflict(self, other_class):
         return (self.start < other_class.end) and (self.end > other_class.start)

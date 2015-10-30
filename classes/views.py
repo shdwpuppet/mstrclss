@@ -6,9 +6,12 @@ from classes.decorators import staff_member_required
 import datetime
 
 
-def index(request):
+def index(request, user=False):
     # the index of the class listing, not of the website
-    classes = Class.objects.all().order_by('start')
+    if not user:
+        classes = Class.objects.all().order_by('start')
+    else:
+        classes = request.user.attendee.class_set.all()
     return render(request, 'templates/masterclass-list.html', {'classes': classes})
 
 
