@@ -9,7 +9,7 @@ class ClassForm(ModelForm):
 
     class Meta:
         model = Class
-        fields = ['name', 'teacher', 'max_attendees', 'description', 'quote']
+        fields = ['name', 'subtitle', 'teacher', 'max_attendees', 'description', 'quote']
 
 
 class SignupForm(forms.Form):
