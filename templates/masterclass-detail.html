@@ -60,7 +60,7 @@
                 <div class="panel-heading">Class Participants</div>
                 <div class="panel-body">
                   {% for attendee in class.attendees.all %}
-                    {{ attendee.user.username }}{% if request.user.is_staff %} <a href="{% url 'class_drop' class.pk attendee.user.pk %}">(Drop)</a>{% endif %}
+                    <p>{{ attendee.user.username }}{% if request.user.is_staff %} <a href="{% url 'class_drop' class.pk attendee.user.pk %}">(Drop)</a>{% endif %}</p>
                 {% endfor %}
                 </div>
               </div>
