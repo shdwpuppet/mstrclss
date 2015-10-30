@@ -1,9 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
-from classes.models import Class, Attendee
+from classes.models import Class
 from classes.forms import ClassForm, SignupForm
+from django.contrib.auth import logout
 from classes.decorators import staff_member_required
 import datetime
+from django.http import HttpResponseRedirect
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
 
 def index(request, user=False):
@@ -41,7 +48,7 @@ def delete_class(request, class_pk):
 
 
 def detail(request, class_pk):
-    Attendee.objects.get_or_create(user=request.user)  # Hackish but idk what else to do
+      # Hackish but idk what else to do
     class_ = get_object_or_404(Class, pk=class_pk)
     form = SignupForm(initial={'userpk': request.user.pk, 'classpk': class_pk})
     if request.method == 'POST':

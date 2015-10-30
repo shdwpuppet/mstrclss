@@ -39,9 +39,12 @@
                     <li>
                         <a href="{% url 'my_classes' %}">My Classes</a>
                     </li>
+                                                <li>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </li>
                     {% else %}
                     <li>
-                        <a href="{% url 'social:begin' 'steam' %}?next={{ request.path }}">Login</a>
+                        <a href="{% url 'social:begin' 'steam' %}?next=/">Login</a>
                     </li>
                     {% endif %}
                 </ul>

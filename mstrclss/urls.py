@@ -21,6 +21,7 @@ from django.views.generic.base import TemplateView
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', TemplateView.as_view(template_name='templates/landing.html')),
+    url(r'^logout/', 'classes.views.logout_view', name='logout'),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^classes/$', 'classes.views.index', {'user': True}, name='class_index'),
     url(r'^myclasses/$', 'classes.views.index', name='my_classes'),
