@@ -27,7 +27,7 @@
             {% elif user.is_authenticated %}
                 {% if first_class %}
                     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rulesmodal">
-                        Sign Up For Class
+                        Sign Up For {% if class.attendees.count >= class.max_attendees %}Waitlist{% else %}Class{% endif %}
                     </button>
                     <!-- Modal -->
                     <div class="modal fade" id="rulesmodal" tabindex="-1" role="dialog" aria-labelledby="rulesmodal">
@@ -99,7 +99,7 @@
                 <div class="panel-heading">Waitlisted Participants</div>
                 <div class="panel-body">
                     {% for attendee in waitlist %}
-                        <p>{{ attendee.user.username }}}</p>
+                        <p>{{ attendee.user.username }}</p>
                     {% endfor %}
                 </div>
             </div>
