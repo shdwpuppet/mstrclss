@@ -46,6 +46,9 @@ def delete_class(request, class_pk):
     class_.delete()
     return redirect(add_or_edit_class)
 
+def schedule(request):
+    classes = Class.objects.all()
+    return render(request, 'templates/schedule.html', {'classes': classes})
 
 def detail(request, class_pk):
     class_ = get_object_or_404(Class, pk=class_pk)

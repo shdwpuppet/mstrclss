@@ -28,6 +28,9 @@
                     <a href="{% url 'class_index' %}">Classes</a>
                 </li>
                 <li>
+                    <a href="{% url 'schedule' %}">Schedule</a>
+                </li>
+                <li>
                     <a href="#">About</a>
                 </li>
                 {% if request.user.is_staff %}
@@ -70,3 +73,4 @@
 </html>
 <script src="{% static 'js/jquery-1.10.2.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% block bottomscript %}{% endblock %}
