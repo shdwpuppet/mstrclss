@@ -31,7 +31,7 @@
                     <a href="{% url 'schedule' %}">Schedule</a>
                 </li>
                 <li>
-                    <a href="#">About</a>
+                    <a href="{% url 'about' %}">About</a>
                 </li>
                 {% if request.user.is_staff %}
                     <li>
