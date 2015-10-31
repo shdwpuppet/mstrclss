@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
+from django.contrib import messages
 from classes.models import Class, WaitlistedAttendee
 from classes.forms import ClassForm, SignupForm
 from django.contrib.auth import logout
 from classes.decorators import staff_member_required
 import datetime
 from django.http import HttpResponseRedirect
+from django.db import IntegrityError
 
 
 def logout_view(request):
@@ -60,7 +62,10 @@ def detail(request, class_pk):
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
-            class_.signup(user=request.user)
+            try:
+                class_.signup(user=request.user)
+            except IntegrityError:
+                messages.error(request, 'You are already waitlisted')
             return redirect('classes.views.detail', class_pk=class_.pk)
     waitlist = WaitlistedAttendee.objects.filter(clss=class_)
     context = {
