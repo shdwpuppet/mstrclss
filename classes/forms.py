@@ -20,7 +20,7 @@ class SignupForm(forms.Form):
         user = User.objects.get(pk=self.cleaned_data.get('userpk'))
         clss = Class.objects.get(pk=self.cleaned_data.get('classpk'))
 
-        if not all([clss.is_conflict(cls) for cls in user.attendee.class_set.all()]):
+        if any([clss.is_conflict(cls) for cls in user.attendee.class_set.all()]):
             raise ValidationError('This class time has a conflict with one or more classes you are currently signed up for')
         elif user.attendee in clss.attendees.all():
             raise ValidationError('You have already signed up for this class')

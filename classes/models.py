@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
+import datetime
 
 
 class Class(models.Model):
@@ -19,7 +20,11 @@ class Class(models.Model):
     subtitle = models.CharField(max_length=128)
 
     def is_conflict(self, other_class):
-        return (self.start < other_class.end) and (self.end > other_class.start)
+        two = datetime.timedelta(hours=2)
+        if self.start < other_class.start:
+            return self.start > other_class.start - two
+        if self.start > other_class.start:
+            return self.start < other_class.start + two
 
     def save(self, *args, **kwargs):
         if not self.id:
