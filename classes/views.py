@@ -63,7 +63,7 @@ def detail(request, class_pk):
             class_.signup(user=request.user)
             return redirect('classes.views.detail', class_pk=class_.pk)
     waitlist = WaitlistedAttendee.objects.filter(clss=class_)
-    if WaitlistedAttendee.objects.filter(clss=class_, user=request.user) in waitlist:
+    if WaitlistedAttendee.objects.filter(clss=class_, user=request.user).exists():
         is_waitlisted = True
     else:
         is_waitlisted = False
