@@ -51,8 +51,9 @@ def detail(request, class_pk):
     class_ = get_object_or_404(Class, pk=class_pk)
     form = SignupForm(initial={'userpk': request.user.pk, 'classpk': class_pk})
     first_class = False
-    if request.user.attendee.class_set.all().count() == 0:
-        first_class = True
+    if not request.user.is_anonymous():
+        if request.user.attendee.class_set.all().count() == 0:
+            first_class = True
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
