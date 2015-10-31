@@ -78,4 +78,4 @@ class WaitlistedAttendee(models.Model):
 
     class Meta:
         ordering = ['signed_up']
-        unique_together = (clss, user)
+        unique_together = ('clss', 'user')
