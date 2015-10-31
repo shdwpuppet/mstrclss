@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
-from classes.models import Class
+from classes.models import Class, WaitlistedAttendee
 from classes.forms import ClassForm, SignupForm
 from django.contrib.auth import logout
 from classes.decorators import staff_member_required
@@ -62,11 +62,12 @@ def detail(request, class_pk):
         if form.is_valid():
             class_.signup(user=request.user)
             return redirect('classes.views.detail', class_pk=class_.pk)
-
+    waitlist = WaitlistedAttendee.objects.filter(clss=class_)
     context = {
         'class': class_,
         'form': form,
-        'first_class': first_class
+        'first_class': first_class,
+        'waitlist': waitlist
     }
     return render(request, 'templates/masterclass-detail.html', context)
 

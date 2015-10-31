@@ -76,3 +76,6 @@ class WaitlistedAttendee(models.Model):
         if not self.id:
             self.signed_up = timezone.now()
         return super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['signed_up']

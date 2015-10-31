@@ -95,6 +95,14 @@
                     {% endfor %}
                 </div>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Waitlisted Participants</div>
+                <div class="panel-body">
+                    {% for attendee in waitlist %}
+                        <p>{{ attendee.user.username }}}</p>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
         <!-- /.col-md-4 -->
     </div>
