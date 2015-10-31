@@ -4,7 +4,7 @@
     <link href="{% static 'css/masterclass-list.css' %}" rel="stylesheet">
 {% endblock %}
 {% block content %}
-<div class="container class-spacer">
+    <div class="container class-spacer">
         <!-- Page Header -->
         <div class="row">
             <div class="col-lg-12">
@@ -17,22 +17,22 @@
         <!-- Projects Row -->
         <div class="row">
             {% for class in classes %}
-            <div class="col-md-4 class-item">
-                <a href="#">
-                    <img class="img-responsive" src="{% static 'images/class_images/'%}{{ class.image_name }}_sm.jpg" alt="">
-                </a>
-                <h3>
-                    <a href="{% url 'class_detail' class.pk %}">{{ class.name }}</a>
-                </h3>
-                <p>{{ class.subtitle }}</p>
-                <p>Taught by: {{ class.teacher }}</p>
-                <p>{{ class.start_time }} - {{ class.end_time }}</p>
-            </div>
-            {% if forloop.counter|divisibleby:3 %}
+                <div class="col-md-4 class-item">
+                    <a href="#">
+                        <img class="img-responsive" src="{% static 'images/class_images/'%}{{ class.image_name }}_sm.jpg" alt="">
+                    </a>
+                    <h3>
+                        <a href="{% url 'class_detail' class.pk %}">{{ class.name }}</a>
+                    </h3>
+                    <p>{{ class.subtitle }}</p>
+                    <p>Taught by: {{ class.teacher }}</p>
+                    <p>{{ class.start_time }} - {{ class.end_time }}</p>
                 </div>
-                <div class="row">
+                {% if forloop.counter|divisibleby:3 %}
+                    </div>
+                    <div class="row">
                 {% endif %}
             {% endfor %}
-        </div>
+            </div>
     </div>
 {% endblock %}

@@ -17,55 +17,55 @@
 </head>
 
 <body>
- <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/"><img style='margin-top: -12px;' src="{% static 'images/moc_175wide_wht.png' %}"></a>
-            </div>
-            <div>
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="{% url 'class_index' %}">Classes</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    {% if request.user.is_staff %}
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><img style='margin-top: -12px;' src="{% static 'images/moc_175wide_wht.png' %}"></a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="{% url 'class_index' %}">Classes</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                {% if request.user.is_staff %}
                     <li>
                         <a href="{% url 'class_manager' %}">Manage</a>
                     </li>
-                    {% endif %}
-                    {% if user.is_authenticated %}
+                {% endif %}
+                {% if user.is_authenticated %}
                     <li>
                         <a href="{% url 'my_classes' %}">My Classes</a>
                     </li>
-                                                <li>
+                    <li>
                         <a href="{% url 'logout' %}">Logout</a>
                     </li>
-                    {% else %}
+                {% else %}
                     <li>
                         <a href="{% url 'social:begin' 'steam' %}?next={{ request.path }}">Login</a>
                     </li>
-                    {% endif %}
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+                {% endif %}
+            </ul>
         </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Page Content -->
-    <div class="container">
-        {% block content %}{% endblock %}
-    <hr>
-            <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Master of Classes 2015. Powered by Steam</p>
-                </div>
-            </div>
-        </footer>
+        <!-- /.navbar-collapse -->
     </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    {% block content %}{% endblock %}
+    <hr>
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Master of Classes 2015. Powered by Steam</p>
+            </div>
+        </div>
+    </footer>
+</div>
 </body>
 </html>
 <script src="{% static 'js/jquery-1.10.2.js' %}"></script>
