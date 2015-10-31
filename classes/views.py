@@ -62,17 +62,10 @@ def detail(request, class_pk):
         if form.is_valid():
             class_.signup(user=request.user)
             return redirect('classes.views.detail', class_pk=class_.pk)
-    waitlist = WaitlistedAttendee.objects.filter(clss=class_)
-    if WaitlistedAttendee.objects.filter(clss=class_, user=request.user).exists():
-        is_waitlisted = True
-    else:
-        is_waitlisted = False
     context = {
         'class': class_,
         'form': form,
         'first_class': first_class,
-        'waitlist': waitlist,
-        'is_waitlisted': is_waitlisted
     }
     return render(request, 'templates/masterclass-detail.html', context)
 
