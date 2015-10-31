@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 import datetime
 from django.db import IntegrityError
+import re
 
 
 class Class(models.Model):
@@ -48,7 +49,7 @@ class Class(models.Model):
         return self.name
 
     def image_name(self):
-        return self.name.replace(' ', '').lower()
+        return re.sub('[\W_]+', '', self.name).lower()
 
     def start_time(self):
         return self.start.time().strftime("%I:%M %p")
