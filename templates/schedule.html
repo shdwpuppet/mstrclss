@@ -25,6 +25,8 @@ $(function() { // document ready
     header: false,
     defaultDate: '2015-11-14',
       defaultView: 'agendaDay',
+    minTime: '13:00',
+    maxTime: '21:00',
     events: [{% for class in classes %}
         {
             title: '{{ class.name }}',
