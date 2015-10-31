@@ -62,10 +62,12 @@ def detail(request, class_pk):
         if form.is_valid():
             class_.signup(user=request.user)
             return redirect('classes.views.detail', class_pk=class_.pk)
+    waitlist = WaitlistedAttendee.objects.filter(clss=class_)
     context = {
         'class': class_,
         'form': form,
         'first_class': first_class,
+        'waitlist': waitlist,
     }
     return render(request, 'templates/masterclass-detail.html', context)
 
