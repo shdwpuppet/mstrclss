@@ -3,6 +3,7 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
 import datetime
+from django.db import IntegrityError
 
 
 class Class(models.Model):
@@ -35,7 +36,10 @@ class Class(models.Model):
         if len(self.attendees.all()) < self.max_attendees:
             self.attendees.add(user.attendee)
         else:
-            WaitlistedAttendee.objects.create(clss=self, user=user)
+            try:
+                WaitlistedAttendee.objects.create(clss=self, user=user)
+            except IntegrityError:
+                raise
 
     class Meta:
         ordering = ['start']
