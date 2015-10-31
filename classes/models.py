@@ -70,7 +70,6 @@ class WaitlistedAttendee(models.Model):
     clss = models.ForeignKey(Class)
     user = models.ForeignKey(User)
     signed_up = models.DateTimeField()
-    unique_together = (clss, user)
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -79,3 +78,4 @@ class WaitlistedAttendee(models.Model):
 
     class Meta:
         ordering = ['signed_up']
+        unique_together = (clss, user)

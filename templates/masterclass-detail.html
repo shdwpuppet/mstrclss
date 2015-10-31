@@ -51,6 +51,8 @@
                     </div>
 
 
+                {% elif is_waitlisted %}
+                    <a href="#" class="btn btn-primary btn-lg disabled">You Are On The Waitlist</a>
                 {% else %}
                     <form method="post">
                         {% csrf_token %}
