@@ -28,7 +28,7 @@
             <h3>{{ class.subtitle }}</h3>
             <p>{{ class.information|linebreaks }}</p>
             <p>Taught by: {{ class.teacher }}</p>
-            <p>Nov. 14th 2015 from {{ class.start_time }} to {{ class.end_time }}</p>
+            <p>Nov. 14th 2015 from {{ class.start_time }} to {{ class.end_time }} EST</p>
 
             {% if request.user.attendee in class.attendees.all %}
                 <a href="{% url 'class_drop' class.pk request.user.pk %}" class="btn btn-primary btn-lg">Drop Class</a>
