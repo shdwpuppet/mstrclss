@@ -28,8 +28,21 @@ def drop(request, class_pk, user_pk):
     if user_pk != request.user.pk or request.user.is_staff:
         class_ = get_object_or_404(Class, pk=class_pk)
         class_.attendees.remove(User.objects.get(pk=user_pk).attendee)
+        class_.wl_moveup()
     return redirect('classes.views.detail', class_pk=class_pk)
 
+
+def wl_drop(request, class_pk, user_pk):
+    if user_pk == request.user.pk or request.user.is_staff:
+        wlatt = get_object_or_404(WaitlistedAttendee, clss__pk=class_pk, user__pk=user_pk)
+        wlatt.delete()
+    return redirect('classes.views.detail', class_pk=class_pk)
+
+
+@staff_member_required()
+def wl_moveup(request, class_pk):
+    get_object_or_404(Class, pk=class_pk).wl_moveup()
+    return redirect(add_or_edit_class)
 
 @staff_member_required
 def toggle_live(request, class_pk):
@@ -48,9 +61,11 @@ def delete_class(request, class_pk):
     class_.delete()
     return redirect(add_or_edit_class)
 
+
 def schedule(request):
     classes = Class.objects.all()
     return render(request, 'templates/schedule.html', {'classes': classes})
+
 
 def detail(request, class_pk):
     class_ = get_object_or_404(Class, pk=class_pk)
@@ -68,11 +83,13 @@ def detail(request, class_pk):
                 messages.error(request, 'You are already waitlisted')
             return redirect('classes.views.detail', class_pk=class_.pk)
     waitlist = WaitlistedAttendee.objects.filter(clss=class_)
+    is_waitlisted = waitlist.filter(user=request.user).exists()
     context = {
         'class': class_,
         'form': form,
         'first_class': first_class,
         'waitlist': waitlist,
+        'is_waitlisted': is_waitlisted,
     }
     return render(request, 'templates/masterclass-detail.html', context)
 
@@ -92,6 +109,7 @@ def add_or_edit_class(request, class_pk=None):
             clss.end = datetime.datetime.strptime('11-14-2015 '+request.POST.get('end_time')+':'+request.POST.get('end_min'), '%m-%d-%Y %H:%M')
             form.save()
             clss.save()
+            clss.wl_moveup()
             return redirect(add_or_edit_class)
 
     form = ClassForm(instance=clss)

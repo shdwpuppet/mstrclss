@@ -29,6 +29,7 @@
                   <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="{% url 'class_toggle_live' class.pk %}" class="text-danger">Toggle Class Live</a></li>
+                      <li><a href="{% url 'class_wl_moveup' class.pk %}" class="text-danger">Moveup Waitlisted Attendees</a></li>
                     <li><a href="#" data-toggle="modal" data-target="#modal{{ class.pk }}" class="text-danger">Delete</a></li>
                   </ul>
                 </div></td>

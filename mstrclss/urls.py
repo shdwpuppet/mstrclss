@@ -29,9 +29,11 @@ urlpatterns = [
     url(r'^myclasses/$', 'classes.views.index', name='my_classes'),
     url(r'^classes/(?P<class_pk>[0-9]+)/$', 'classes.views.detail', name='class_detail'),
     url(r'^classes/(?P<class_pk>[0-9]+)/drop/(?P<user_pk>[0-9]+)/$', 'classes.views.drop', name='class_drop'),
+    url(r'^classes/(?P<class_pk>[0-9]+)/wldrop/(?P<user_pk>[0-9]+)/$', 'classes.views.wl_drop', name='class_wldrop'),
     url(r'^classes/manage/$', 'classes.views.add_or_edit_class', name='class_manager'),
     url(r'^classes/manage/(?P<class_pk>[0-9]+)/$', 'classes.views.add_or_edit_class', name='class_edit'),
     url(r'^classes/manage/toggle_live/(?P<class_pk>[0-9]+)/$', 'classes.views.toggle_live', name='class_toggle_live'),
+    url(r'^classes/manage/wl_moveup/(?P<class_pk>[0-9]+)/$', 'classes.views.wl_moveup', name='class_wl_moveup'),
     url(r'^classes/manage/delete/(?P<class_pk>[0-9]+)/$', 'classes.views.delete_class', name='class_delete'),
 ]
 

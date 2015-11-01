@@ -32,6 +32,8 @@
 
             {% if request.user.attendee in class.attendees.all %}
                 <a href="{% url 'class_drop' class.pk request.user.pk %}" class="btn btn-primary btn-lg">Drop Class</a>
+                {% elif is_waitlisted %}
+                <a href="{% url 'class_wldrop' class.pk request.user.pk %}" class="btn btn-primary btn-lg">Drop Waitlist</a>
             {% elif user.is_authenticated %}
                 {% if first_class %}
                     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rulesmodal">
@@ -95,7 +97,7 @@
             <p>{{ class.description|linebreaks }}</p></div>
         <div class="col-md-4">
             <div class="panel panel-default">
-                <div class="panel-heading">Class Participants</div>
+                <div class="panel-heading">Class Participants ({{ class.attendees.count }}/{{ class.max_attendees }})</div>
                 <div class="panel-body">
                     {% for attendee in class.attendees.all %}
                         <p>{{ attendee.user.username }}{% if request.user.is_staff %} <a href="{% url 'class_drop' class.pk attendee.user.pk %}">(Drop)</a>{% endif %}</p>
@@ -103,10 +105,10 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Waitlisted Participants</div>
+                <div class="panel-heading">Waitlisted Participants: {{ waitlist.count }}</div>
                 <div class="panel-body">
                     {% for attendee in waitlist %}
-                        <p>{{ attendee.user.username }}</p>
+                        <p>{{ attendee.user.username }}{% if request.user.is_staff %} <a href="{% url 'class_wldrop' class.pk attendee.user.pk %}">(Drop)</a>{% endif %}</p>
                     {% endfor %}
                 </div>
             </div>

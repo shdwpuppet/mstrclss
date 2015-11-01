@@ -60,6 +60,11 @@ class Class(models.Model):
     def is_live(self):
         return self.start < timezone.now() < self.end or self.manual_live
 
+    def wl_moveup(self):
+        x = max(self.max_attendees - self.attendees.count(), 0)
+        wl = WaitlistedAttendee.objects.filter(clss=self)[:x]
+        [self.signup(user=wluser.user) for wluser in wl]
+        [wluser.delete() for wluser in wl]
 
 class Attendee(models.Model):
     user = models.OneToOneField(User)
