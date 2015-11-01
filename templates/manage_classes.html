@@ -20,9 +20,9 @@
             {% for class in classes %}
                 <tr>
                     <td>{{ class.pk }}</td>
-                    <td>{{ class.name }}</td>
+                    <td><a href="{% url 'class_detail' class.pk %}">{{ class.name }}</a></td>
                     <td>{{ class.teacher }}</td>
-                    <td>{{ class.attendees.count }}</td>
+                    <td>{{ class.attendees.count }}/{{ class.max_attendees }}</td>
                     <td>{{ class.start_time }}-{{ class.end_time }}</td>
                     <td><div class="btn-group">
                   <a href="{% url 'class_edit' class.pk %}" class="btn btn-default">Edit</a>
