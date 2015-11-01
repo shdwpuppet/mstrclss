@@ -83,7 +83,10 @@ def detail(request, class_pk):
                 messages.error(request, 'You are already waitlisted')
             return redirect('classes.views.detail', class_pk=class_.pk)
     waitlist = WaitlistedAttendee.objects.filter(clss=class_)
-    is_waitlisted = waitlist.filter(user=request.user).exists()
+    if not request.user.is_anonymous():
+        is_waitlisted = waitlist.filter(user=request.user).exists()
+    else:
+        is_waitlisted = False
     context = {
         'class': class_,
         'form': form,
