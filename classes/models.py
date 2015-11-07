@@ -20,6 +20,7 @@ class Class(models.Model):
     manual_live = models.BooleanField(default=False)
     information = models.TextField()
     subtitle = models.CharField(max_length=128)
+    mumble_token = models.CharField(max_length=24)
 
     def is_conflict(self, other_class):
         two = datetime.timedelta(hours=2)
