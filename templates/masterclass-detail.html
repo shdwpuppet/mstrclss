@@ -10,11 +10,11 @@
             <strong>Oh snap!</strong> {{ form.non_field_errors }}
         </div>
     {% endif %}
-        {% if messages %}
+    {% if messages %}
         <div class="alert alert-dismissible alert-danger">
             <button type="button" class="close" data-dismiss="alert">×</button>
             {% for message in messages %}
-            <strong>Oh snap!</strong> {{ message|safe }}
+                <strong>Oh snap!</strong> {{ message|safe }}
             {% endfor %}
         </div>
     {% endif %}
@@ -32,7 +32,20 @@
 
             {% if request.user.attendee in class.attendees.all %}
                 <a href="{% url 'class_drop' class.pk request.user.pk %}" class="btn btn-primary btn-lg">Drop Class</a>
-                {% elif is_waitlisted %}
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#tokenmodal">Get Mumble Auth</button>
+                <div class="modal fade" id="tokenmodal" tabindex="-1" role="dialog" aria-labelledby="tokenmodal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Mumble Auth Token Setup</h4>
+                            </div>
+                            <div class="modal-body">{% include 'templates/mumble_token.html' %}</div>
+                        </div>
+                    </div>
+                </div>
+
+            {% elif is_waitlisted %}
                 <a href="{% url 'class_wldrop' class.pk request.user.pk %}" class="btn btn-primary btn-lg">Drop Waitlist</a>
             {% elif user.is_authenticated %}
                 {% if first_class %}
@@ -59,6 +72,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="modal fade" id="rulesmodal" tabindex="-1" role="dialog" aria-labelledby="tokenmodal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">The Rules</h4>
+                                </div>
+                                <div class="modal-body">{% include 'templates/mumble_token.html' %}></div>
+                            </div>
+                        </div>
+                    </div>
 
                 {% else %}
                     <form method="post">
@@ -78,16 +102,16 @@
 
     <hr>
     {% if not class.quote == "None" %}
-    <!-- Call to Action Well -->
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="well text-center">
-                {{ class.quote }}
+        <!-- Call to Action Well -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="well text-center">
+                    {{ class.quote }}
+                </div>
             </div>
+            <!-- /.col-lg-12 -->
         </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
+        <!-- /.row -->
     {% endif %}
 
     <!-- Content Row -->

@@ -9,7 +9,7 @@ class ClassForm(ModelForm):
 
     class Meta:
         model = Class
-        fields = ['name', 'subtitle', 'information', 'teacher', 'max_attendees', 'description', 'quote']
+        fields = ['name', 'subtitle', 'information', 'teacher', 'max_attendees', 'description', 'quote', 'mumble_token']
 
 
 class SignupForm(forms.Form):
