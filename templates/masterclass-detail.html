@@ -33,7 +33,7 @@
             {% if request.user.attendee in class.attendees.all %}
                 <a href="{% url 'class_drop' class.pk request.user.pk %}" class="btn btn-primary btn-lg">Drop Class</a>
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#tokenmodal">Get Mumble Auth</button>
-                {% if class.is_live %}<div class="modal fade" id="tokenmodal" tabindex="-1" role="dialog" aria-labelledby="tokenmodal">
+                <div class="modal fade" id="tokenmodal" tabindex="-1" role="dialog" aria-labelledby="tokenmodal">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -43,7 +43,7 @@
                             <div class="modal-body">{% include 'templates/mumble_token.html' %}</div>
                         </div>
                     </div>
-                </div>{% endif %}
+                </div>
 
             {% elif is_waitlisted %}
                 <a href="{% url 'class_wldrop' class.pk request.user.pk %}" class="btn btn-primary btn-lg">Drop Waitlist</a>

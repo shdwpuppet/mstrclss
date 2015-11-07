@@ -1,4 +1,18 @@
-<h3>THIS CLASS' AUTH TOKEN IS: {{ class.mumble_token }}</h3>
-<p>The instructor of this class has indicated that it will include a mumble portion. In order to keep classes separate and to reduce the incidence of class disruptions, we have implemented a mumble auth token system. You will need to manually put in the mumble auth token to be able to access you class, but don't worry, it is really easy. Please watch this short video by Kevinispwn to learn more.</p>
-<a class="h2" href="mumble://chi4.tragicservers.com:64737/MASTERS%20OF%20CLASSES/Entry%20Channel?title=Root&version=1.2.0">Connect to Mumble</a>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/HYE-9PklOaU" frameborder="0" allowfullscreen></iframe>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">The Auth Token for {{ class.name }} is {{ class.mumble_token }}</div>
+  <div class="panel-body">
+    <p>The instructor of this class has indicated that it will include a mumble portion. In order to keep classes separate and to reduce the incidence of class disruptions, we have implemented a mumble auth token system. You will need to manually put in the mumble auth token to be able to access you class, but don't worry, it is really easy. Please watch this short video by Kevinispwn to learn more.</p>
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/HYE-9PklOaU"></iframe>
+</div>
+  </div>
+
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item"><a href="mumble://chi4.tragicservers.com:64737/MASTERS%20OF%20CLASSES/Entry%20Channel?title=Root&version=1.2.0">Connect to Mumble</a></li>
+    <li class="list-group-item"><b>Mumble Info:</b> chi4.tragicservers.com:64737</li>
+    <li class="list-group-item"><b>Channel:</b> MASTERS OF CLASSES > CLASSES > {{ class.name }} - {{ class.subtitle }} > Students</li>
+    <li class="list-group-item">If you need help, it will be available in mumble.</li>
+  </ul>
+</div>
